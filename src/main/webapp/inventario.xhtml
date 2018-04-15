@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet name="./css/bootstrap.css"/>
+                <h:outputStylesheet name="./css/bootstrap-them.css"/>                
+                <title>Tienda - TODOUNO</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    TODOUNO Shop
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <a href="http://www.frm.com.co">FRM</a> (c) 2018
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="Nuevo producto" url="./faces/nuevoproducto.xhtml" />
+                            <p:menuitem value="Compras" url="./faces/compras.xhtml" />
+                            <p:menuitem value="Ventas" url="./faces/ventas.xhtml" />                            
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form styleClass="col-md-12">
+                        <p:dataTable var="item" value="#{inventarioControlador.inv}"
+                                     styleClass="table table-responsive table-hover col-md-12"
+                                     emptyMessage="No existen registros para mostrar" 
+                                     rows="10" paginator="true" 
+                                     paginatorPosition="bottom" 
+                                     paginatorAlwaysVisible="false">
+                            <p:column headerText="Código">
+                                <h:outputText value="#{item.idproducto}" />
+                            </p:column>
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{item.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Compras">
+                                <h:outputText value="#{item.compras}" />
+                            </p:column>                            
+                            <p:column headerText="Ventas">
+                                <h:outputText value="#{item.ventas}" />
+                            </p:column>                            
+                            <p:column headerText="Saldo">
+                                <h:outputText value="#{item.saldo}" />
+                            </p:column>                                                        
+                        </p:dataTable>
+                    </h:form>
+                </p:layoutUnit>                
+            </p:layout>
+        </h:body>
+    </f:view>
+    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+    <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"/>
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"/>    
+</html>

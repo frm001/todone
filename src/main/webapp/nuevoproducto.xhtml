@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet name="./css/bootstrap.css"/>
+                <h:outputStylesheet name="./css/bootstrap-them.css"/>                
+                <title>Tienda - TODOUNO</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    TODOUNO Shop
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <a href="http://www.frm.com.co">FRM</a> (c) 2018
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="Compras" url="./faces/compras.xhtml" />
+                            <p:menuitem value="Ventas" url="./faces/ventas.xhtml" />
+                            <p:menuitem value="Inventario" url="./faces/inventario.xhtml" />
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:outputLabel value="AGREGAR NUEVO PRODUCTO"/>
+                    <h:form>
+                        <p:growl id="msg" showDetail="true" sticky="true" />  
+                        <h:inputText styleClass="form-control" value="#{productoControlador.producto.descripcion}"
+                                     ph:placeholder="Descripción del producto"/>
+                        <div class="col-md-12">
+                            <p:commandButton value="Enviar" actionListener="#{productoControlador.grabar()}" update="msg"/>
+                        </div>
+                    </h:form>
+                </p:layoutUnit>                
+            </p:layout>
+        </h:body>
+    </f:view>
+    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+    <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"/>
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"/>    
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ph="http://xmlns.jcp.org/jsf/passthrough">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <h:outputStylesheet name="./css/bootstrap.css"/>
+                <h:outputStylesheet name="./css/bootstrap-them.css"/>                
+                <title>Tienda - TODOUNO</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    TODOUNO Shop
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <a href="http://www.frm.com.co">FRM</a> (c) 2018
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="Nuevo producto" url="./faces/nuevoproducto.xhtml" />
+                            <p:menuitem value="Compras" url="./faces/compras.xhtml" />
+                            <p:menuitem value="Inventario" url="./faces/inventario.xhtml" />
+                        </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:outputLabel value="REGISTRAR VENTAS"/>
+                    <h:form styleClass="col-md-12">
+                        <p:growl id="msg" showDetail="true" sticky="true" />
+                        <div class="col-md-12">
+                         <h:inputText id="txtFecha" styleClass="form-control" 
+                                      value="#{ventaControlador.venta.fecha}"
+                                      title="Fecha de venta (aaaa-mm-dd)"
+                                      ph:placdholder="Fecha (aaaa-mm-ss)"/>
+                        </div>
+                        <div class="col-md-12">                            
+                            <h:inputText id="txtIdcliente" 
+                                         value="#{ventaControlador.venta.idpersona}"
+                                         title="Identificacion del cliente"
+                                         ph:placeholder="Idenficiacion del cliente">
+                                <f:ajax listener="#{ventaControlador.findPersona()}" 
+                                        render="txtPersona"/>
+                            </h:inputText>
+                            <h:outputLabel id="txtPersona" value="#{ventaControlador.venta.persona}"/>
+                        </div>
+                        <div class="col-md-12">
+                            <h:inputText id="txtIdproducto" 
+                                         value="#{ventaControlador.venta.idproducto}"
+                                         title="Código del producto"
+                                         ph:placeholder="Código del producto">
+                                <f:ajax listener="#{ventaControlador.findProducto()}" 
+                                        render="txtProducto"/>
+                            </h:inputText>
+                            <h:outputLabel id="txtProducto" value="#{ventaControlador.venta.producto}"/>
+                        </div>
+                        <div class="col-md-6">
+                            <h:inputText id="txtCantidad" styleClass="form-control" 
+                                         value="#{ventaControlador.venta.cantidad}"
+                                         title="Cantidad vendidad"
+                                         ph:placeholder="Cantidad vendida"/>
+                        </div>
+                        <div class="col-md-6">
+                            <h:inputText id="txtVlrunidad" styleClass="form-control" 
+                                         value="#{ventaControlador.venta.vlrunidad}"
+                                         title="Valor por unidad"
+                                         ph:placeholder="Valor por unidad"/>
+                        </div>
+                        <div class="col-md-12 panel">
+                            <p:commandButton value="Enviar" actionListener="#{ventaControlador.grabar()}" update="msg"/>
+                        </div>
+                    </h:form>
+                </p:layoutUnit>                
+            </p:layout>
+        </h:body>
+    </f:view>
+    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+    <h:outputScript library="primefaces" name="jquery/jquery-plugins.js"/>
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"/>    
+</html>
